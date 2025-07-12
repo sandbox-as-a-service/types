@@ -35,3 +35,5 @@ jobs:
 
       - name: Publish
         run: pnpm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
