@@ -1,0 +1,21 @@
+{
+  "name": "types",
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "packageManager": "pnpm@10.12.1",
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.29.5"
+  }
+}
