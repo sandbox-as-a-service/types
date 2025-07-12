@@ -7,11 +7,10 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       '@changesets/cli':
         specifier: ^2.29.5
         version: 2.29.5
-    devDependencies:
       '@tsconfig/node22':
         specifier: ^22.0.2
         version: 22.0.2
