@@ -1,4 +1,4 @@
-name: Publish Packages
+name: Publish Package
 
 permissions:
   contents: read
@@ -23,17 +23,25 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js & Authenticate
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: "https://npm.pkg.github.com"
-          cache: "pnpm"
+          registry-url: https://npm.pkg.github.com
+          scope: "@sandbox-as-a-service" # ensures @sandbox-as-a-service/* goes to GH Packages
+          cache: pnpm
+          auth-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Publish
-        run: pnpm publish --access public
+      - name: Build
+        run: pnpm run build
+
+      - name: Publish to GitHub Packages
+        run: |
+          pnpm publish \
+            --registry https://npm.pkg.github.com \
+            --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
