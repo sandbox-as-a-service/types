@@ -37,6 +37,9 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      - name: Bump patch version
+        run: pnpm version patch --no-git-tag-version
+
       - name: Publish to GitHub Packages
         run: |
           pnpm publish \
