@@ -1,6 +1,6 @@
 {
   "name": "@sandbox-as-a-service/types",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -13,10 +13,6 @@
   "packageManager": "pnpm@10.12.1",
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",
-    "typescript": "^5.8.3",
-    "@changesets/cli": "^2.29.5"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "typescript": "^5.8.3"
   }
 }

@@ -12,6 +12,7 @@ on:
 
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -27,7 +28,6 @@ jobs:
         with:
           node-version: 22
           registry-url: https://npm.pkg.github.com
-          scope: "@sandbox-as-a-service"
           cache: pnpm
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -35,9 +35,9 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build
+        run: pnpm run build
 
-      - name: Publish via Changesets
-        run: pnpm changeset publish --yes
+      - name: Publish to GitHub Packages
+        run: pnpm changeset publish --registry https://npm.pkg.github.com
         env:
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
