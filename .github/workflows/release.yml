@@ -4,12 +4,15 @@ permissions:
   contents: read
   packages: read
 
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 on:
   push:
     branches: [main]
 
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -24,7 +27,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          registry-url: "https://npm.pkg.github.com"
           cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Publish
+        run: pnpm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
