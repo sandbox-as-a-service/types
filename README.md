@@ -1,5 +1,17 @@
-# Types
+# @sandbox-as-a-service/types
 
-A collection of reusable TypeScript types for our organization.
+Central TypeScript types package for the **Sandbox as a Service** ecosystem. This repo provides shared type definitions for use across related services.
 
-This package provides common type definitions that can be shared across multiple projects to ensure consistency and reduce code duplication.
+## Installation
+
+With [Yarn](https://yarnpkg.com/):
+
+```bash
+yarn add @sandbox-as-a-service/types
+```
+
+Or with [pnpm](https://pnpm.io/):
+
+```bash
+pnpm add @sandbox-as-a-service/types
+```
