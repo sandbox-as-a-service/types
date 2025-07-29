@@ -20,8 +20,8 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v4
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,4 +38,4 @@ jobs:
       - name: Publish to GitHub Packages
         run: pnpm publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
