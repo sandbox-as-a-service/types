@@ -1,6 +1,6 @@
 {
   "name": "@sandbox-as-a-service/types",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "exports": {
     ".": {
       "import": "./dist/index.js",
