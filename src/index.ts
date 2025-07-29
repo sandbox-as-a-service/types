@@ -14,7 +14,7 @@ export type FraudDetectionRequestBody = {
     country: string;
   };
 
-  shipping: {
+  shipping?: {
     name: string;
     address: string;
     city: string;
