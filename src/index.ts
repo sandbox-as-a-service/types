@@ -5,7 +5,7 @@ export type FraudDetectionRequestBody = {
   session_id: string;
   password_hash: string;
   user_id: string;
-  billing: {
+  billing?: {
     name: string;
     address: string;
     city: string;
