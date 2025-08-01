@@ -45,10 +45,10 @@ jobs:
         with:
           script: |
             const { execSync } = require('child_process')
+            const core = require('@actions/core')
             const size = execSync('du -sh dist | cut -f1').toString().trim()
 
-            github
-              .summary
+            await core.summary
               .addHeading('📦 Published package size')
               .addListItem(`**Size:** ${size}`)
               .write()
