@@ -23,6 +23,9 @@ jobs:
         with:
           fetch-depth: 0 # grab full history so pnpm version can write package.json
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Bump version
         run: |
           pnpm version ${{ github.event.inputs.bump }}
@@ -33,9 +36,6 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           git commit -am "chore: bump to $(node -p \"require('./package.json').version\")"
           git push origin main
-
-      - name: Enable Corepack
-        run: corepack enable
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
