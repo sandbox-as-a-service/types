@@ -39,3 +39,11 @@ jobs:
         run: pnpm publish
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summarize package size
+        run: |
+          SIZE=$(du -sh dist | cut -f1)
+          {
+            echo "### 📦 Published package size"
+            echo "- **Size:** $SIZE"
+          } >> "$GITHUB_STEP_SUMMARY"
