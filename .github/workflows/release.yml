@@ -1,14 +1,17 @@
-name: Publish Package
-
-permissions:
-  contents: read
-  packages: write
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+name: Release
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Which semver segment to bump"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
   release:
@@ -18,7 +21,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0 # grab full history so pnpm version can write package.json
+
+      - name: Bump version
+        run: |
+          pnpm version ${{ github.event.inputs.bump }}
+
+      - name: Commit & push bump
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git commit -am "chore: bump to $(node -p \"require('./package.json').version\")"
+          git push origin main
 
       - name: Enable Corepack
         run: corepack enable
