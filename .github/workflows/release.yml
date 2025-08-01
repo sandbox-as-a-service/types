@@ -48,6 +48,7 @@ jobs:
             const size = execSync('du -sh dist | cut -f1').toString().trim()
 
             core.summary
-              .addHeading('📦 Published package size')
-              .addList([`**Size:** ${size}`])
+              .addHeading('📦 Published package size', '2')
+              .addRaw(`Size: ${size}`)
+              .addSeparator()
               .write()
