@@ -49,3 +49,4 @@ jobs:
 
             core.summary
               .addHeading(`📦 Published package size: ${size}`, '2')
+              .write()
