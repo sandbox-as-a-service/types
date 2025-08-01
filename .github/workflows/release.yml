@@ -1,5 +1,9 @@
 name: Release
 
+permissions:
+  contents: write # Required to push version bumps
+  packages: write # Required to publish packages
+
 on:
   workflow_dispatch:
     inputs:
