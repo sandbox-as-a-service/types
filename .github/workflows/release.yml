@@ -41,9 +41,14 @@ jobs:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Summarize package size
-        run: |
-          SIZE=$(du -sh dist | cut -f1)
-          {
-            echo "### 📦 Published package size"
-            echo "- **Size:** $SIZE"
-          } >> "$GITHUB_STEP_SUMMARY"
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process')
+            const size = execSync('du -sh dist | cut -f1').toString().trim()
+
+            github
+              .summary
+              .addHeading('📦 Published package size')
+              .addListItem(`**Size:** ${size}`)
+              .write()
