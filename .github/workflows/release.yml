@@ -24,8 +24,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # grab full history so pnpm version can write package.json
 
       - name: Enable Corepack
         run: corepack enable
