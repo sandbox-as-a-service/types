@@ -26,16 +26,17 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
+      - name: Set up Git identity
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
       - name: Bump version
         run: |
           pnpm version ${{ github.event.inputs.bump }}
 
-      - name: Commit & push bump
-        run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git commit -am "chore: bump to $(node -p \"require('./package.json').version\")"
-          git push origin main
+      - name: Push version bump
+        run: git push origin main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
